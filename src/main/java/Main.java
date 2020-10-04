@@ -1,4 +1,5 @@
 import exteption.ExitException;
+import exteption.WrongInputDataException;
 import exteption.WrongNumberException;
 import service.SHAGen;
 import service.WinDefiner;
@@ -17,6 +18,17 @@ public class Main {
             if (!(args.length >= 3) || args.length % 2 == 0) {
                 throw new WrongNumberException();
             }
+
+            for (int i = 0; i < args.length; i++) {
+                for (int j = 0; j < args.length; j++) {
+                    if(i != j && args[i].equals(args[j])) {
+                        throw new WrongInputDataException();
+                    }
+                }
+            }
+
+
+
 
             Random rand = new Random();
             int int_random = rand.nextInt(args.length);
@@ -58,6 +70,8 @@ public class Main {
             System.out.println("Reading error");
         } catch (ExitException e) {
             System.out.println("Good bye");
+        } catch (WrongInputDataException e) {
+            System.out.println("Error: Wrong number input data");
         }
 
 
